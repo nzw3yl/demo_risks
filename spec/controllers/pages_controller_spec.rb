@@ -4,7 +4,7 @@ describe PagesController do
   render_views
 
   before(:each) do
-    @base_title = "Risks & Priorities"
+    @base_title = "Workload Manager"
   end
 
   describe "GET 'home'" do

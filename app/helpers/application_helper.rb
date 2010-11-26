@@ -1,11 +1,11 @@
 module ApplicationHelper
 
  def logo
-    image_tag("logo.png", :alt => "Risks & Priorities", :class => "round")
+    image_tag("logo.gif", :alt => "Workload Manager", :class => "round", :width => "45", :height => "45")
  end
 
  def title
-    base_title = "Risks & Priorities"
+    base_title = "Workload Manager"
     if @title.nil?
       base_title
     else
