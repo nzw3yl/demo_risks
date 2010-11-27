@@ -1,4 +1,6 @@
 DemoRisks::Application.routes.draw do
+  get "contracts/new"
+
   resources :users do
     member do
       get :following, :followers
