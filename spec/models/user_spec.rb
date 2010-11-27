@@ -6,7 +6,8 @@ describe User do
     @attr = { :name                  => "Example User", 
               :email                 => "user@example.com",
               :password              => "foobar",
-              :password_confirmation => "foobar"
+              :password_confirmation => "foobar",
+	      :alias		     => "foobar"
             }
   end
 
@@ -47,7 +48,7 @@ describe User do
   end
 
   it "should reject duplicate email addresses" do
-    User.create!(@attr)
+    User.create!(@attr.merge(:alias => "uniquez56t"))
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
@@ -130,6 +131,42 @@ describe User do
 
   end
 
+  describe "alias attribute" do
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should respond to alias" do
+       @user.should respond_to(:alias)
+    end
+
+    it "should not allow a blank alias" do
+      User.new(@attr.merge(:alias => "")).
+       should_not be_valid
+    end
+
+    it "should reject long alias names" do
+      long = "a" * 11
+      hash = @attr.merge(:alias => long)
+      User.new(hash).should_not be_valid
+    end
+  
+    it "should reject spaces in the alias" do
+       User.new(@attr.merge(:alias => "a b")).
+       should_not be_valid
+    end
+
+    it "should reject duplicate alias names" do
+    	user_with_duplicate_alias = User.new(@attr.merge(:email => "unique@unique.com"))
+    	user_with_duplicate_alias.should_not be_valid
+    end
+  
+    it "should reject alias names identical up to case" do
+    	upcased_alias = @attr[:alias].upcase
+    	user_with_duplicate_alias = User.new(@attr.merge(:alias => upcased_alias,:email => "uniquier@unique.com"))
+    	user_with_duplicate_alias.should_not be_valid
+    end
+  end
   describe "admin attribute" do
 
     before(:each) do
