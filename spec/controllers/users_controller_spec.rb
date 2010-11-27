@@ -16,12 +16,12 @@ describe UsersController do
 
       before(:each) do
         @user = test_sign_in(Factory(:user))
-        second = Factory(:user, :email => "another@example.com")
-        third  = Factory(:user, :email => "another@example.net")
+        second = Factory(:user, :email => "another@example.com", :alias => "uniquer")
+        third  = Factory(:user, :email => "another@example.net", :alias => "uniquier")
 
         @users = [@user, second, third]
         30.times do
-          @users << Factory(:user, :email => Factory.next(:email))
+          @users << Factory(:user, :email => Factory.next(:email), :alias => Factory.next(:alias) )
         end
       end
 
@@ -153,7 +153,7 @@ describe UsersController do
 
          before(:each) do
            @attr = { :name => "", :email => "", :password => "",
-                  :password_confirmation => "" }
+                  :password_confirmation => "", :alias => "" }
          end
 
          it "should not create a user" do
@@ -177,7 +177,7 @@ describe UsersController do
 
          before(:each) do
            @attr = { :name => "New User", :email => "user@example.com",
-                  :password => "foobar", :password_confirmation => "foobar" }
+                  :password => "foobar", :password_confirmation => "foobar", :alias => "foobar" }
          end
 
          it "should create a user" do
@@ -207,7 +207,7 @@ describe UsersController do
      before(:each) do
         @user = test_sign_in(Factory(:user))
         @attr = { :name => "New User", :email => "user@example.com",
-                  :password => "foobar", :password_confirmation => "foobar" }
+                  :password => "foobar", :password_confirmation => "foobar", :alias => "foobar" }
      end
      it "should direct users to root URL" do
        post :create, :user => @attr
@@ -252,7 +252,7 @@ describe UsersController do
 
       before(:each) do
         @attr = { :email => "", :name => "", :password => "",
-                  :password_confirmation => "" }
+                  :password_confirmation => "", :alias => "foobar" }
       end
 
       it "should render the 'edit' page" do
@@ -270,7 +270,7 @@ describe UsersController do
 
       before(:each) do
         @attr = { :name => "New Name", :email => "user@example.org",
-                  :password => "barbaz", :password_confirmation => "barbaz" }
+                  :password => "barbaz", :password_confirmation => "barbaz", :alias => "foobar" }
       end
 
       it "should change the user's attributes" do
@@ -314,7 +314,7 @@ describe UsersController do
      describe "for signed-in users" do
 
       before(:each) do
-        wrong_user = Factory(:user, :email => "user@example.net")
+        wrong_user = Factory(:user, :email => Factory.next(:email), :alias => Factory.next(:alias) )
         test_sign_in(wrong_user)
       end
 
@@ -355,7 +355,7 @@ describe UsersController do
     describe "as an admin user" do
 
       before(:each) do
-        @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        @admin = Factory(:user, :email => Factory.next(:email), :alias => Factory.next(:alias), :admin => true )
         test_sign_in(@admin)
       end
 
@@ -397,7 +397,7 @@ describe UsersController do
 
       before(:each) do
         @user = test_sign_in(Factory(:user))
-        @other_user = Factory(:user, :email => Factory.next(:email))
+        @other_user = Factory(:user, :email => Factory.next(:email), :alias => Factory.next(:alias) )
         @user.follow!(@other_user)
       end
 

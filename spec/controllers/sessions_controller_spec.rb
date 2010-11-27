@@ -44,7 +44,7 @@ describe SessionsController do
 
       before(:each) do
         @user = Factory(:user)
-        @attr = { :email => @user.email, :password => @user.password }
+        @attr = { :email => @user.email, :password => @user.password, :alias => @user.alias }
       end
 
       it "should sign the user in" do
