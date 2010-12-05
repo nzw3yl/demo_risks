@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Alias:</strong>
+  <%= @contract.alias %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @contract.name%>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @contract.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_contract_path(@contract) %> |
+  <%= link_to "View All", contracts_path %>
+</p>

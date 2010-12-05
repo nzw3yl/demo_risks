@@ -6,4 +6,6 @@ class Contract < ActiveRecord::Base
   validates :alias,    :presence     => true,
                        :length       => { :within => 1..10 },
                        :uniqueness   => { :case_sensitive => false }
+
+ 
 end

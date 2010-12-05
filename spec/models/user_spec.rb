@@ -186,6 +186,26 @@ describe User do
       @user.should be_admin
     end
   end
+
+  describe "manager attribute" do
+
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should respond to manager" do
+      @user.should respond_to(:manager)
+    end
+
+    it "should not be an admin by default" do
+      @user.should_not be_manager
+    end
+
+    it "should be convertible to an admin" do
+      @user.toggle!(:manager)
+      @user.should be_manager
+    end
+  end
   describe "micropost associations" do
 
     before(:each) do

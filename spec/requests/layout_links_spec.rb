@@ -27,11 +27,7 @@ describe "LayoutLinks" do
     response.should have_selector('title', :content => "Sign up")
   end
 
-   it "should have a contract page at '/contracts'" do
-    get '/contracts'
-    response.should have_selector('title', :content => "Contracts")
-  end
-
+ 
   it "should have the right links on the layout" do
     visit root_path
     click_link "About"
@@ -80,7 +76,72 @@ describe "LayoutLinks" do
       response.should have_selector("a", :href => user_path(@user),
                                          :content => "Profile")
     end
+   
+    it "should not have a contracts link" do
+          visit root_path
+          response.should_not have_selector("a", :href => contracts_path,
+                                             :content => "Contracts")
+    end
 
+ 
+     
+     it "should have a contracts link if user is a manager" do
+          @user.toggle!(:manager)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Contracts")
+     end
+
+     it "should have a workload link if user is a manager" do
+          @user.toggle!(:manager)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Workload")
+     end
+
+     it "should have a work history link if user is a manager" do
+          @user.toggle!(:manager)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Work History")
+     end
+
+     it "should have a reports link if user is a manager" do
+          @user.toggle!(:manager)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Reports")
+     end
+
+     it "should have a contracts link if user is an administrator" do
+          @user.toggle!(:admin)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Contracts")
+     end
+
+     it "should have a workload link if user is an administrator" do
+          @user.toggle!(:admin)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Workload")
+     end
+
+     it "should have a work history link if user is an administrator" do
+          @user.toggle!(:admin)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Work History")
+     end
+
+     it "should have a reports link if user is an administrator" do
+          @user.toggle!(:admin)
+          visit root_path
+          response.should have_selector("a", :href => contracts_path,
+                                             :content => "Reports")
+     end
+
+     
   end
 
 end

@@ -79,6 +79,43 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
+/* Manager Navigation */
+
+
+mannav {
+  float: right;
+}
+
+mannav {
+  background-color: #ffc;
+  padding: 0 0.7em;
+  white-space: nowrap;
+}
+
+mannav ul {
+  margin: 0;
+  padding: 0;
+}
+
+mannav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0.2em 0;
+}
+
+mannav ul li a {
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+mannav ul li a:visited {
+  color: #09c;
+}
+
+mannav ul li a:hover {
+  text-decoration: underline;
+}
+
 /* Sign up button */
 
 a.signup_button {
@@ -246,4 +283,45 @@ form.new_micropost textarea {
 }
 
 
+.simple_form label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin: 2px 10px;
+}
+
+.simple_form div.input {
+  margin-bottom: 10px;
+}
+
+.simple_form div.boolean, .simple_form input[type='submit'] {
+  margin-left: 120px;
+}
+
+.simple_form div.boolean label, .simple_form label.collection_radio {
+  float: none;
+  margin: 0;
+}
+
+.simple_form label.collection_radio {
+  margin-right: 10px;
+  margin-left: 2px;
+}
+
+.simple_form .error {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #D00;
+  display: block;
+}
+
+.simple_form .hint {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #555;
+  display: block;
+  font-style: italic;
+}
 

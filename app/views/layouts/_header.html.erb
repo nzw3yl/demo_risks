@@ -16,6 +16,16 @@
       <% end %>
     </ul>
   </nav>
+   <% if signed_in? && (current_user.manager || current_user.admin) %>
+  <mannav class="round">
+    <ul>
+      <li><%= link_to "Contracts", contracts_path %></li>
+      <li><%= link_to "Workload", contracts_path %></li>
+      <li><%= link_to "Work History", contracts_path %></li>
+      <li><%= link_to "Reports", contracts_path %></li>
+    </ul>
+  </mannav>
+  <% end %>
 </header>
 
 

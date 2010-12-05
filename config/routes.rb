@@ -1,5 +1,4 @@
 DemoRisks::Application.routes.draw do
-  get "contracts/new"
 
   resources :users do
     member do
@@ -8,9 +7,6 @@ DemoRisks::Application.routes.draw do
   end
  
   resources :contracts
-  resources :projects,      :controller => 'contracts'
-  resources :environments,  :controller => 'contracts'
- 
 
   resources :sessions,      :only => [:new, :create, :destroy]
   resources :microposts,    :only => [:create, :destroy]

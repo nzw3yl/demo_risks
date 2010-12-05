@@ -1,0 +1,15 @@
+
+<%= simple_form_for @contract do |f| %>
+<%= f.input :alias %>
+<%= f.input :name %>
+<%= f.input :description %>
+<%= f.button :submit %>
+<% end%>
+
+<p>
+  <%= link_to "Show", @contract %> |
+  <%= link_to "Delete", @contract, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", contracts_path %>
+</p>
+
+

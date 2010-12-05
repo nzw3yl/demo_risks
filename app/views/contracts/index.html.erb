@@ -1,2 +1,16 @@
-<h1>Contracts#index</h1>
-<p>Find me in app/views/contracts/index.html.erb</p>
+<table class="round">
+  <tr>
+   <th><%= sortable "alias" %></th>
+   <th><%= sortable "name" %></th>
+   <th><%= sortable "description" %></th>
+  </tr>
+  <% for contract in @contracts %>
+  <tr>
+   <td><%= contract.alias %></td>
+   <td><%= contract.name %></td>
+   <td><%= contract.description %></td>
+   <td><%= link_to "edit", edit_contract_path(contract) %> | <%= link_to "delete", contract , :method => :delete , :confirm => 'Are you sure?'%></td>
+  </tr>
+  <% end %>
+</table>
+<p><%= link_to "New Contract", new_contract_path %></p>

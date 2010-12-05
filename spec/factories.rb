@@ -19,3 +19,9 @@ Factory.define :micropost do |micropost|
   micropost.association :user
 end
 
+Factory.define :contract do |contract|
+  contract.alias       "qwerty"
+  contract.name        "qwerty"
+  contract.description "qwerty"
+end
+
