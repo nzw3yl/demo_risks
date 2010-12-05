@@ -325,3 +325,30 @@ form.new_micropost textarea {
   font-style: italic;
 }
 
+table.admin {
+  border-collapse: collapse;
+}
+
+.admin td, .admin th {
+  padding: 4px 10px;
+  border: solid 1px #AAA;
+}
+
+.admin .price {
+  text-align: right;
+}
+
+.admin th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.admin th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+.admin th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+

@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20101130022440
+#
+# Table name: contracts
+#
+#  id          :integer         not null, primary key
+#  alias       :string(255)
+#  name        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  description :string(255)
+#
+
 class Contract < ActiveRecord::Base
   attr_accessible :name, :description, :alias
 
