@@ -1,11 +1,13 @@
 <table class="admin">
   <tr>
+   <th><%= sortable "type" %></th>
    <th><%= sortable "alias" %></th>
    <th><%= sortable "name" %></th>
    <th><%= sortable "description" %></th>
   </tr>
   <% for contract in @contracts %>
   <tr>
+   <td><%= contract.type_name %></td>
    <td><%= contract.alias %></td>
    <td><%= contract.name %></td>
    <td><%= contract.description %></td>

@@ -1,0 +1,11 @@
+<table class="admin">
+  <tr>
+   <th><%= sortable "name" %></th>
+  </tr>
+  <% for contract_type in @contract_types %>
+  <tr>
+   <td><%= contract_type.name %></td>
+  </tr>
+  <% end %>
+</table>
+<p><%= link_to "New Contract Type", new_contract_type_path %></p>

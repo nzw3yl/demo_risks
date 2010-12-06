@@ -1,6 +1,7 @@
 <%= simple_form_for @contract do |f| %>
 <%= f.input :alias %>
 <%= f.input :name %>
+<%= f.association :contract_type, :include_blank => false %>
 <%= f.input :description %>
 <%= f.button :submit %>
 <% end%>

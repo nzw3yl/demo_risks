@@ -13,7 +13,8 @@ class ContractsController < ApplicationController
 
   def index
     @title = "Contracts"
-    @contracts = Contract.order("LOWER(" + sort_column + ") " + sort_direction)
+    @sort_attributes = "LOWER(" + sort_column + ") " + sort_direction
+    @contracts = Contract.find(:all, :include => :contract_type, :order => @sort_attributes)
   end
 
   def create

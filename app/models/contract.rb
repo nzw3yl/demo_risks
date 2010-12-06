@@ -12,7 +12,7 @@
 #
 
 class Contract < ActiveRecord::Base
-  attr_accessible :name, :description, :alias
+  attr_accessible :name, :description, :alias, :contract_type_id
 
   validates :name,     :presence     => true,
                        :length       => { :maximum => 50 }
@@ -20,5 +20,10 @@ class Contract < ActiveRecord::Base
                        :length       => { :within => 1..10 },
                        :uniqueness   => { :case_sensitive => false }
 
+  belongs_to :contract_type
+
+  def type_name
+    contract_type.name if contract_type
+  end
  
 end

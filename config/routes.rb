@@ -1,5 +1,7 @@
 DemoRisks::Application.routes.draw do
 
+  get "contract_types/new"
+
   resources :users do
     member do
       get :following, :followers
@@ -8,9 +10,10 @@ DemoRisks::Application.routes.draw do
  
   resources :contracts
 
-  resources :sessions,      :only => [:new, :create, :destroy]
-  resources :microposts,    :only => [:create, :destroy]
-  resources :relationships, :only => [:create, :destroy]
+  resources :sessions,       :only => [:new, :create, :destroy]
+  resources :microposts,     :only => [:create, :destroy]
+  resources :relationships,  :only => [:create, :destroy]
+  resources :contract_types, :only => [:new, :create, :index]
 
   root :to => 'pages#home'
 
