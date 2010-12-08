@@ -1,19 +1,31 @@
 DemoRisks::Application.routes.draw do
+  #get "work_loads/index"
 
-  get "contract_types/new"
+  #get "work_loads/create"
+
+  #get "work_loads/destroy"
+
+  #get "work_loads/show"
+
+  #get "work_loads/edit"
+
+  #get "work_loads/update"
+
+  #get "work_loads/new"
+ 
 
   resources :users do
     member do
       get :following, :followers
     end
   end
- 
-  resources :contracts
 
   resources :sessions,       :only => [:new, :create, :destroy]
   resources :microposts,     :only => [:create, :destroy]
   resources :relationships,  :only => [:create, :destroy]
+  resources :contracts
   resources :contract_types, :only => [:new, :create, :index]
+  resources :work_loads
 
   root :to => 'pages#home'
 

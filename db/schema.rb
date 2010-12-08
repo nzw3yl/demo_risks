@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101206010719) do
+ActiveRecord::Schema.define(:version => 20101208035029) do
 
   create_table "contract_types", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(:version => 20101206010719) do
 
   add_index "microposts", ["user_id"], :name => "index_microposts_on_user_id"
 
+  create_table "obligations", :force => true do |t|
+    t.integer  "contract_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "work_load_id"
+  end
+
+  add_index "obligations", ["contract_id"], :name => "index_obligations_on_contract_id"
+  add_index "obligations", ["work_load_id"], :name => "index_obligations_on_work_load_id"
+
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -59,5 +69,28 @@ ActiveRecord::Schema.define(:version => 20101206010719) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  create_table "work_loads", :force => true do |t|
+    t.string   "name"
+    t.string   "alias"
+    t.string   "description"
+    t.integer  "probability"
+    t.integer  "impact"
+    t.integer  "priority"
+    t.string   "status"
+    t.integer  "percent_complete"
+    t.integer  "resolution_effort"
+    t.integer  "workload_type_id"
+    t.date     "requested_date"
+    t.date     "expected_date"
+    t.date     "completed_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "work_loads", ["alias"], :name => "index_work_loads_on_alias"
+  add_index "work_loads", ["completed_date"], :name => "index_work_loads_on_completed_date"
+  add_index "work_loads", ["name"], :name => "index_work_loads_on_name"
+  add_index "work_loads", ["workload_type_id"], :name => "index_work_loads_on_workload_type_id"
 
 end
