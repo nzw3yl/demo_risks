@@ -1,2 +1,44 @@
-<h1>WorkLoads#show</h1>
-<p>Find me in app/views/work_loads/show.html.erb</p>
+<div class="showform">
+   <div>
+   <strong><%= @work_load.status %> </strong>
+   <%= @work_load.completed_date %> , <%= @work_load.percent_complete %> % complete
+  </div>
+  <div>
+    <strong>Name:</strong>
+    <%= @work_load.name %>
+    (#<%= @work_load.alias %>)
+    <strong>Priority:</strong>
+    <%= @work_load.priority%> 
+  </div>
+  <div>
+    <strong>Description:</strong>
+    <%= @work_load.description %>
+  </div>
+  <div>
+    <strong>Affected Contracts:</strong>
+    <% @work_load.contracts.each do |wc| %>
+    <%= link_to wc.name, contract_path(wc) %> | 
+    <%  end %>
+  </div>
+  <div>
+    <strong>Assigned Users:</strong>
+    <% @work_load.users.each do |wu| %>
+    <%= link_to wu.name, user_path(wu) %> |
+    <%  end %>
+  </div>
+  <div>
+    <strong> Resolution hours:</strong>
+    <%= @work_load.resolution_effort %>
+  </div>
+  <div>
+    <strong> Requested Completion Date:</strong>
+    <%= @work_load.requested_date %>
+  </div>
+  <div>
+    <strong> Projected Completion Date: </strong>
+    <%= @work_load.expected_date %>
+  </div>
+    <%= link_to "Edit", edit_work_load_path(@work_load) %> |
+    <%= link_to "View All", work_loads_path %>
+  </div>
+</div>

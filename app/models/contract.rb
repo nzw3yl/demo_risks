@@ -21,7 +21,7 @@ class Contract < ActiveRecord::Base
                        :length       => { :within => 1..10 },
                        :uniqueness   => { :case_sensitive => false }
 
-  has_many   :obligations
+  has_many   :obligations, :dependent => :destroy
   has_many   :work_loads, :through => :obligations
   belongs_to :contract_type
 

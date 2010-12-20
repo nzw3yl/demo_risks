@@ -1,2 +1,8 @@
-<h1>WorkLoads#edit</h1>
-<p>Find me in app/views/work_loads/edit.html.erb</p>
+
+<%= render 'form' %>
+
+<p>
+  <%= link_to "Show", @work_load %> |
+  <%= link_to "Delete", @work_load, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", work_loads_path %>
+</p>

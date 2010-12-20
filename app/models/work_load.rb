@@ -22,30 +22,49 @@
 #
 
 class WorkLoad < ActiveRecord::Base
-   has_many :obligations 
-   has_many :contracts, :through => :obligations       
-attr_accessible :name, :alias, :description, :probability, :impact, :contract_ids,
-                :priority, :status, :percent_complete, :resolution_effort, 
-                :workload_type_id, :requested_date, :expected_date, :completed_date
-   attr_accessor   :contract_ids
+    attr_accessible :name, :alias, :description, :probability, :impact, :contract_ids, :user_ids, :status, :percent_complete, :resolution_effort, :workload_type_id, :requested_date, :expected_date, :completed_date
 
-   after_save :update_contracts
+   has_many :obligations, :dependent => :destroy
+   has_many :contracts, :through => :obligations
+   has_many :assignments, :dependent => :destroy
+   has_many :users, :through => :assignments, :validate => false      
 
-   def update_contracts
-     unless contract_ids.nil?
-       self.obligations.each do |o|
-         o.destroy unless contract_ids.include?(o.contract_id.to_s)
-         contract_ids.delete(o.contract_id.to_s)
-       end
-       contract_ids.each do |c|
-         self.obligations.create!(:contract_id => c) unless c.blank?
-       end
-       reload
-       self.contract_ids = nil
+  validates :name,     		:presence     => true,
+                       		:length       => { :maximum => 50 },
+		       		:uniqueness   => { :case_sensitive => false }
+ 
+  validates :alias,    		:presence     => true,
+                       		:length       => { :within => 1..10 },
+                       		:uniqueness   => { :case_sensitive => false }
+
+  validates :probability,    	:numericality => true,
+                                :inclusion    => { :in => 0..5 }
+  
+  validates :impact,    	:numericality => true,
+	                        :inclusion    => { :in => 0..5 }
+  
+  validates :percent_complete,	:numericality => true,
+  				:inclusion    => { :in => 0..100 }
+  
+  validates :resolution_effort,	:numericality => true
+  
+  validates :status,		:inclusion    => { :in => %w(Inactive Active Closed Cancelled)}                    		
+
+  before_save :set_priority, :set_completed_date
+  
+
+  private
+    
+    def  set_priority
+      self.priority = self.probability * self.impact
+    end
+
+    def set_completed_date
+     if self.status_changed? && (self.status == "Closed" || self.status == "Cancelled") 
+        self.completed_date = Date.today
+     elsif self.status_changed? && self.percent_complete < 100 && (self.status == "Active" || self.status == "Inactive")
+         self.completed_date = nil
      end
-   end
+    end
 
-
-
-
-end
+ end

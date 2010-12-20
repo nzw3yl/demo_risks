@@ -1,15 +1,18 @@
 <%= simple_form_for @work_load do |f| %>
 <%= f.input :requested_date, :label => 'Due Date' %>
 <%= f.input :alias, :input_html => { :size => 15 } %>
-<%= f.association :contracts, :collection => Contract.all(:order => 'name'), :as => :select%>
+<%= f.association :contracts, :collection => Contract.all(:order => 'name') %>
+<%= f.association :users, :collection => User.all(:order => 'name') %>
 <%= f.input :name, :input_html => { :size => 30 } %>
 <%= f.input :description %>
 <%= f.input :impact, :input_html => { :size => 2, :value => 0 }, :collection => 0..5, :as => :radio, :label => 'Possible Impact', :hint => '5 is high' %>
 <%= f.input :probability, :input_html => { :size => 2, :value => 0}, :collection => 0..5, :as => :radio, :label => 'Likelihood' %>
-<%= f.input :status, :as => :radio, :collection => [["Inactive", true],["Active", false],["Closed", false],["Cancelled", false]] %>
+<%= f.input :status, :as => :radio, :collection => [["Inactive"],["Active"],["Closed"],["Cancelled"]] %>
 <%= f.input :percent_complete, :input_html => { :size => 2, :value => 0} %>
 <%= f.input :resolution_effort, :input_html => { :size => 3 }, :hint => 'Measured in hours' %>
 <%= f.input :expected_date %>
+<% if @work_load.status == "Closed" || @work_load.status == "Cancelled" %>
 <%= f.input :completed_date %>
+<% end %>
 <%= f.button :submit %>
 <% end%>

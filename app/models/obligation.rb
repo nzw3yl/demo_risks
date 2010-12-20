@@ -12,7 +12,7 @@
 
 class Obligation < ActiveRecord::Base
   attr_accessible :contract_id, :work_load_id
-  
-  belongs_to :work_loads, :foreign_key => "work_load_id"
-  belongs_to :contracts, :foreign_key => "contract_id"
+  belongs_to :work_load
+  belongs_to :contract
+
 end
