@@ -1,23 +1,13 @@
 DemoRisks::Application.routes.draw do
-  #get "work_loads/index"
-
-  #get "work_loads/create"
-
-  #get "work_loads/destroy"
-
-  #get "work_loads/show"
-
-  #get "work_loads/edit"
-
-  #get "work_loads/update"
-
-  #get "work_loads/new"
  
-
   resources :users do
     member do
       get :following, :followers
     end
+  end
+
+  resources :work_loads do
+    resources :work_histories 
   end
 
   resources :sessions,       :only => [:new, :create, :destroy]
@@ -25,7 +15,7 @@ DemoRisks::Application.routes.draw do
   resources :relationships,  :only => [:create, :destroy]
   resources :contracts
   resources :contract_types, :only => [:new, :create, :index]
-  resources :work_loads
+  resources :work_load_types, :only => [:new, :create, :index] 
 
   root :to => 'pages#home'
 

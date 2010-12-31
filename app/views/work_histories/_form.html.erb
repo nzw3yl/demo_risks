@@ -1,0 +1,11 @@
+<%= simple_form_for [@work_load, @work_history] do |f| %>
+<%= f.input :work_load_id, :as => :hidden, :input_html => { :value => @work_load.id } %>
+<%= f.input :work_load_name, :as => :hidden, :input_html => { :value => @work_load.name } %>
+<%= f.input :work_load_type_name, :as => :hidden, :input_html => { :value => @work_load_type_name } %>
+<%= f.input :priority, :as => :hidden, :input_html => { :value => @work_load.priority} %>
+<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id} %>
+<%= f.input :effort, :input_html => { :size => 5 } %>
+<%= f.input :occurrence_date %>
+<%= f.submit 'Record Time' %>
+<% end%>
+

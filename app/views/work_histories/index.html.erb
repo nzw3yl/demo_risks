@@ -1,0 +1,11 @@
+<table class="admin">
+  <tr>
+   <th><%= sortable "name" %></th>
+  </tr>
+  <% for work_load_type in @work_histories %>
+  <tr>
+   <td><%= work_history.effort %></td>
+  </tr>
+  <% end %>
+</table>
+<p><%= link_to "New Work History", new_work_history_path %></p>

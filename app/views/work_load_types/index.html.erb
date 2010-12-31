@@ -1,0 +1,11 @@
+<table class="admin">
+  <tr>
+   <th><%= sortable "name" %></th>
+  </tr>
+  <% for work_load_type in @work_load_types %>
+  <tr>
+   <td><%= work_load_type.name %></td>
+  </tr>
+  <% end %>
+</table>
+<p><%= link_to "New Work Load Type", new_work_load_type_path %></p>

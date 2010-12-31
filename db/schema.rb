@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101208221204) do
+ActiveRecord::Schema.define(:version => 20101221005209) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -80,6 +80,25 @@ ActiveRecord::Schema.define(:version => 20101208221204) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
+  create_table "work_histories", :force => true do |t|
+    t.integer  "work_load_id"
+    t.integer  "effort"
+    t.date     "occurrence_date"
+    t.integer  "user_id"
+    t.string   "work_load_name"
+    t.string   "contract_name"
+    t.integer  "priority"
+    t.string   "work_load_type_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "work_load_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "work_loads", :force => true do |t|
     t.string   "name"
     t.string   "alias"
@@ -90,7 +109,7 @@ ActiveRecord::Schema.define(:version => 20101208221204) do
     t.string   "status"
     t.integer  "percent_complete"
     t.integer  "resolution_effort"
-    t.integer  "workload_type_id"
+    t.integer  "work_load_type_id"
     t.date     "requested_date"
     t.date     "expected_date"
     t.date     "completed_date"
@@ -101,6 +120,6 @@ ActiveRecord::Schema.define(:version => 20101208221204) do
   add_index "work_loads", ["alias"], :name => "index_work_loads_on_alias"
   add_index "work_loads", ["completed_date"], :name => "index_work_loads_on_completed_date"
   add_index "work_loads", ["name"], :name => "index_work_loads_on_name"
-  add_index "work_loads", ["workload_type_id"], :name => "index_work_loads_on_workload_type_id"
+  add_index "work_loads", ["work_load_type_id"], :name => "index_work_loads_on_workload_type_id"
 
 end

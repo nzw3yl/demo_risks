@@ -36,6 +36,12 @@ class WorkLoadsController < ApplicationController
 
   def show
    @work_load = WorkLoad.find(params[:id])
+   @work_load_type = WorkLoadType.find_by_id(@work_load.work_load_type_id)
+   if @work_load_type
+      @work_load_type_name = @work_load_type.name
+   else
+      @work_load_type_name = nil
+   end
   end
 
   def edit
