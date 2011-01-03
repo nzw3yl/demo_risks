@@ -1,15 +1,16 @@
 <div class="showform">
    <div>
-   <strong><%= @work_load.status %> </strong>
-   <%= @work_load.completed_date %> , <%= @work_load.percent_complete %> % complete
-  </div>
-  <div>
     <strong>Name:</strong>
     <%= @work_load.name %>
     (#<%= @work_load.alias %>)
-    <strong>Priority:</strong>
-    <%= @work_load.priority%> 
   </div>
+   <div>
+   <strong><%= @work_load.status %> </strong>
+   <%= @work_load.completed_date %>
+    <strong>, Risk Factor:</strong>
+    <%= @work_load.priority%> [25 Max] 
+  </div>
+  
   <div>
     <strong>Type of Work:</strong>
     <%= @work_load_type_name %>
@@ -32,7 +33,7 @@
   </div>
   <div>
     <strong> Resolution hours:</strong>
-    <%= @work_load.resolution_effort %>
+    <%= @work_load.resolution_effort %> , <%= @percent_complete %> % complete
   </div>
   <div>
     <strong> Requested Completion Date:</strong>

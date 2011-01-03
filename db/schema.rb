@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101221005209) do
+ActiveRecord::Schema.define(:version => 20110103034742) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "work_load_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "effort"
   end
 
   add_index "assignments", ["user_id"], :name => "index_assignments_on_user_id"
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20101221005209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "work_load_id"
+    t.decimal  "effort"
   end
 
   add_index "obligations", ["contract_id"], :name => "index_obligations_on_contract_id"
@@ -82,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20101221005209) do
 
   create_table "work_histories", :force => true do |t|
     t.integer  "work_load_id"
-    t.integer  "effort"
+    t.decimal  "effort"
     t.date     "occurrence_date"
     t.integer  "user_id"
     t.string   "work_load_name"
@@ -91,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20101221005209) do
     t.string   "work_load_type_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "contract_ids"
   end
 
   create_table "work_load_types", :force => true do |t|
@@ -108,13 +111,14 @@ ActiveRecord::Schema.define(:version => 20101221005209) do
     t.integer  "priority"
     t.string   "status"
     t.integer  "percent_complete"
-    t.integer  "resolution_effort"
+    t.decimal  "resolution_effort"
     t.integer  "work_load_type_id"
     t.date     "requested_date"
     t.date     "expected_date"
     t.date     "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "estimate"
   end
 
   add_index "work_loads", ["alias"], :name => "index_work_loads_on_alias"

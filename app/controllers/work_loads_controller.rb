@@ -19,7 +19,7 @@ class WorkLoadsController < ApplicationController
 
   def create
    @work_load = WorkLoad.new(params[:work_load])
-    if @work_load.save #(:validate => false) # :( yuck! a poor hack
+    if @work_load.save 
       flash[:success] = "Workload Created"
       redirect_to @work_load
     else
@@ -42,11 +42,17 @@ class WorkLoadsController < ApplicationController
    else
       @work_load_type_name = nil
    end
+   if @work_load.estimate.to_f > 0.1
+    @percent_complete = @work_load.resolution_effort.to_f / @work_load.estimate.to_f * 100
+    @percent_complete = @percent_complete.to_i
+   else
+    @percent_complete = 0
+   end
+   
   end
 
   def edit
    @work_load = WorkLoad.find(params[:id])
-   #@work_load.contract_ids = Obligation.find_all_by_work_load_id(:work_loads)
   end
 
   def update

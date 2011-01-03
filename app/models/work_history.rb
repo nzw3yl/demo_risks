@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 20101221005209
+# Schema version: 20110103034742
 #
 # Table name: work_histories
 #
 #  id                  :integer         not null, primary key
 #  work_load_id        :integer
-#  effort              :integer
+#  effort              :decimal(, )
 #  occurrence_date     :date
 #  user_id             :integer
 #  work_load_name      :string(255)
@@ -14,6 +14,7 @@
 #  work_load_type_name :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
+#  contract_ids        :string(255)
 #
 
 class WorkHistory < ActiveRecord::Base

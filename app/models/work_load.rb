@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101220030522
+# Schema version: 20110102020136
 #
 # Table name: work_loads
 #
@@ -12,17 +12,18 @@
 #  priority          :integer
 #  status            :string(255)
 #  percent_complete  :integer
-#  resolution_effort :integer
+#  resolution_effort :decimal(, )
 #  work_load_type_id :integer
 #  requested_date    :date
 #  expected_date     :date
 #  completed_date    :date
 #  created_at        :datetime
 #  updated_at        :datetime
+#  estimate          :decimal(, )
 #
 
 class WorkLoad < ActiveRecord::Base
-    attr_accessible :name, :alias, :description, :probability, :impact, :contract_ids, :user_ids, :status, :percent_complete, :resolution_effort, :work_load_type_id, :requested_date, :expected_date, :completed_date
+    attr_accessible :name, :alias, :description, :probability, :impact, :contract_ids, :user_ids, :status, :percent_complete, :resolution_effort, :work_load_type_id, :requested_date, :expected_date, :completed_date, :estimate
 
    has_many :obligations, :dependent => :destroy
    has_many :contracts, :through => :obligations
@@ -54,6 +55,11 @@ class WorkLoad < ActiveRecord::Base
 
   before_save :set_priority, :set_completed_date
   
+  def set_resolution_effort
+       self.resolution_effort = WorkHistory.sum(:effort, :conditions => ['work_load_id = ?', self.id])
+       self.save
+  end
+
 
   private
     
