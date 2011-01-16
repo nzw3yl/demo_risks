@@ -21,6 +21,7 @@
     <ul>
       <li><%= link_to "Contracts", contracts_path %></li>
       <li><%= link_to "Workload", work_loads_path %></li>
+      <li><%= link_to "Work History", contracts_path %></li>
       <li><%= link_to "Reports", contracts_path %></li>
     </ul>
   </mannav>

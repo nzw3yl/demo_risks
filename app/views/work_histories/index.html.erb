@@ -1,11 +1,15 @@
 <table class="admin">
   <tr>
-   <th><%= sortable "name" %></th>
+   <th>User Name</th>
+   <th>Hours</th>
+   <th>Date</th>
   </tr>
-  <% for work_load_type in @work_histories %>
+  <% for work_history in @work_histories %>
   <tr>
+   <td><%= work_history.user_id %></td>
    <td><%= work_history.effort %></td>
+   <td><%= work_history.occurrence_date %></td>
+   <td> <%= link_to icon("delete"), work_history , :method => :delete , :confirm => 'Are you sure?'%> </td>
   </tr>
-  <% end %>
 </table>
-<p><%= link_to "New Work History", new_work_history_path %></p>
+<p><%= link_to "Record New Work", new_work_load_work_history_path(@work_load) %></p>

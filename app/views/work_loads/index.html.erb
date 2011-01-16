@@ -11,7 +11,7 @@
    <td><%= work_load.status %></td>
    <td><%= work_load.priority %></td>
    <td><%= work_load.completed_date %></td>
-   <td><%= link_to "edit", edit_work_load_path(work_load) %> | <%= link_to "delete", work_load , :method => :delete , :confirm => 'Are you sure?'%></td>
+   <td><%= link_to icon("edit"), edit_work_load_path(work_load) %> | <%= link_to icon("delete"), work_load , :method => :delete , :confirm => 'Are you sure?'%> | <%= link_to icon("time"), new_work_load_work_history_path(work_load) %></td>
   </tr>
   <% end %>
 </table>

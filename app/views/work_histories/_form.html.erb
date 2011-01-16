@@ -1,11 +1,23 @@
+<div class="nav">
+   <div>
+    <strong>Name:</strong>
+    <%= @work_load.name %>
+  </div>
+  <div>
+   <strong>Percent Complete: </strong>
+    <%= @work_load.percent_complete %> %
+    <strong>Effort Expended: </strong>
+    <%= @work_load.resolution_effort %> hrs
+  </div>
+</div><br/>
 <%= simple_form_for [@work_load, @work_history] do |f| %>
 <%= f.input :work_load_id, :as => :hidden, :input_html => { :value => @work_load.id } %>
 <%= f.input :work_load_name, :as => :hidden, :input_html => { :value => @work_load.name } %>
 <%= f.input :work_load_type_name, :as => :hidden, :input_html => { :value => @work_load_type_name } %>
 <%= f.input :priority, :as => :hidden, :input_html => { :value => @work_load.priority} %>
-<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id} %>
 <%= f.simple_fields_for @work_load do |wl| %>
 <%=  wl.association :contracts, :disabled => @disabled_contracts, :as => :check_boxes %>
+<%=  wl.association :users, :collection => @assigned_users, :as => :radio, :if => (current_user.admin? || current_user.manager?) %>
 <%  end%>
 <%= f.input :effort, :input_html => { :size => 5 } %>
 <%= f.input :occurrence_date %>

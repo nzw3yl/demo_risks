@@ -3,6 +3,12 @@ module ApplicationHelper
  def logo
     image_tag("logo.gif", :alt => "Workload Manager", :class => "round", :width => "45", :height => "45")
  end
+  
+ def icon(action, size = 16)
+   @icon_name = action + "-icon.png"
+   @alt_text = action.capitalize
+   image_tag(@icon_name, :alt => @alt_text, :class => "round", :width => size, :height => size)
+ end
 
  def title
     base_title = "Workload Manager"
