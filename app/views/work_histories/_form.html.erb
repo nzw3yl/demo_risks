@@ -17,7 +17,9 @@
 <%= f.input :priority, :as => :hidden, :input_html => { :value => @work_load.priority} %>
 <%= f.simple_fields_for @work_load do |wl| %>
 <%=  wl.association :contracts, :disabled => @disabled_contracts, :as => :check_boxes %>
-<%=  wl.association :users, :collection => @assigned_users, :as => :radio, :if => (current_user.admin? || current_user.manager?) %>
+<%   if elevated_priv? %>
+<%=   wl.association :users, :collection => @assigned_users, :as => :radio %>
+<%   end %>
 <%  end%>
 <%= f.input :effort, :input_html => { :size => 5 } %>
 <%= f.input :occurrence_date %>

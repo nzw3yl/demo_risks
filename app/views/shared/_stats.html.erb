@@ -17,6 +17,15 @@
         </a>
       </td>
     </tr>
+    <tr>
+      <td>
+        <a href="<%= assigned_url(:id => @user) %>">
+          <span id="assigned" class="stat">
+            <%= @user.assignments.count %> assigned
+          </span>
+        </a>
+      </td>
+    </tr>
   </table>
 </div>
 

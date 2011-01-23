@@ -5,4 +5,8 @@ module UsersHelper
                                               :class    => 'gravatar',
                                               :gravatar => options)
   end
+
+  def elevated_priv?
+    current_user.admin? || current_user.manager?
+  end
 end

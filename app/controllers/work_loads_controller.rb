@@ -12,9 +12,14 @@ class WorkLoadsController < ApplicationController
   end
 
   def index
-   @work_loads = WorkLoad.find(:all)
    @sort_attributes = "LOWER(" + sort_column + ") " + sort_direction
-   @contracts = WorkLoad.find(:all, :order => @sort_attributes)
+   #@contracts = WorkLoad.find(:all, :order => @sort_attributes)
+   if params[:id]
+   	@work_loads = User.find_by_id(params[:id]).work_loads.order(@sort_attributes)
+   else
+	@work_loads = WorkLoad.find(:all, :order => @sort_attributes)
+   end
+   
   end
 
   def create

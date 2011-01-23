@@ -1,9 +1,10 @@
 DemoRisks::Application.routes.draw do
- 
+
   resources :users do
     member do
       get :following, :followers
     end
+    resources :assignments
   end
 
   resources :work_loads do
@@ -27,6 +28,7 @@ DemoRisks::Application.routes.draw do
   match '/contact',  :to => 'pages#contact'
   match '/help',     :to => 'pages#help'
 
+  match '/users/:id/work_loads', :to => 'work_loads#index', :as => :assigned
 
 
   # The priority is based upon order of creation:
