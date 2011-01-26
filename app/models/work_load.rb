@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110102020136
+# Schema version: 20110126024724
 #
 # Table name: work_loads
 #
@@ -9,7 +9,7 @@
 #  description       :string(255)
 #  probability       :integer
 #  impact            :integer
-#  priority          :integer
+#  priority          :string(255)
 #  status            :string(255)
 #  percent_complete  :integer
 #  resolution_effort :decimal(, )
@@ -64,7 +64,16 @@ class WorkLoad < ActiveRecord::Base
   private
     
     def  set_priority
-      self.priority = self.probability * self.impact
+      prio = self.probability * self.impact
+      if (20..25).include?(prio)
+         self.priority = "A"
+      elsif (15..19).include?(prio)
+         self.priority = "B"
+      elsif (8..14).include?(prio)
+         self.priority = "C"
+      else
+         self.priority = "D"
+      end
     end
 
     def set_completed_date
@@ -73,6 +82,14 @@ class WorkLoad < ActiveRecord::Base
      elsif self.status_changed? && self.percent_complete < 100 && (self.status == "Active" || self.status == "Inactive")
          self.completed_date = nil
      end
+    end
+
+    def self.search(search)
+       if search
+         where('name LIKE ?', "%#{search}%")
+       else
+         scoped
+       end
     end
 
  end

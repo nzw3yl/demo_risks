@@ -1,23 +1,13 @@
-<table class="admin">
-  <tr>
-   <th><%= sortable "name" %></th>
-   <th><%= sortable "status" %></th>
-   <th><%= sortable "priority" %></th>
-    <th><%= sortable "completed_date" %></th>
-  </tr>
-  <% for work_load in @work_loads %>
-  <tr>
-   <td><%= work_load.name %></td>
-   <td><%= work_load.status %></td>
-   <td><%= work_load.priority %></td>
-   <td><%= work_load.completed_date %></td>
-   <td>
-   <%= link_to icon("view"), work_load %>
-   <% if elevated_priv? %>
-   <%= link_to icon("edit"), edit_work_load_path(work_load) %> | <%= link_to icon("delete"), work_load , :method => :delete , :confirm => 'Are you sure?'%> | 
-   <% end %>
-   <%= link_to icon("time"), new_work_load_work_history_path(work_load) %></td>
-  </tr>
-  <% end %>
-</table>
+<%= form_tag work_loads_path, :method => 'get', :id => "work_loads_search" do %>
+   
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <div id="work_loads"><%= render 'work_loads'%></div>
+<% end %>
+
+
+
+
 <p><%= link_to "New Work Load", new_work_load_path %></p>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103034742) do
+ActiveRecord::Schema.define(:version => 20110126024724) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20110103034742) do
     t.string   "description"
     t.integer  "probability"
     t.integer  "impact"
-    t.integer  "priority"
+    t.string   "priority"
     t.string   "status"
     t.integer  "percent_complete"
     t.decimal  "resolution_effort"

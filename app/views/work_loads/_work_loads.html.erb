@@ -1,0 +1,25 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="admin">
+  <tr>
+   <th><%= sortable "name" %></th>
+   <th><%= sortable "status" %></th>
+   <th><%= sortable "priority" %></th>
+    <th><%= sortable "requested_date" %></th>
+  </tr>
+  <% for work_load in @work_loads %>
+  <tr>
+   <td><%= work_load.name %></td>
+   <td><%= work_load.status %></td>
+   <td><%= work_load.priority %></td>
+   <td><%= work_load.requested_date %></td>
+   <td>
+   <%= link_to icon("view"), work_load %>
+   <% if elevated_priv? %>
+   <%= link_to icon("edit"), edit_work_load_path(work_load) %> | <%= link_to icon("delete"), work_load , :method => :delete , :confirm => 'Are you sure?'%> | 
+   <% end %>
+   <%= link_to icon("time"), new_work_load_work_history_path(work_load) %></td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @work_loads%>

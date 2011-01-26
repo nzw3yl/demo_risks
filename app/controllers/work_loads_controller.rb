@@ -15,9 +15,10 @@ class WorkLoadsController < ApplicationController
    @sort_attributes = "LOWER(" + sort_column + ") " + sort_direction
    #@contracts = WorkLoad.find(:all, :order => @sort_attributes)
    if params[:id]
-   	@work_loads = User.find_by_id(params[:id]).work_loads.order(@sort_attributes)
+   	@work_loads = User.find_by_id(params[:id]).work_loads.search(params[:search]).order(@sort_attributes).paginate(:per_page => 5, :page => params[:page])
    else
-	@work_loads = WorkLoad.find(:all, :order => @sort_attributes)
+	#@work_loads = WorkLoad.find(:all, :order => @sort_attributes).paginate(:per_page => 5, :page => params[:page])
+        @work_loads = WorkLoad.search(params[:search]).order(@sort_attributes).paginate(:per_page => 5, :page => params[:page])
    end
    
   end
